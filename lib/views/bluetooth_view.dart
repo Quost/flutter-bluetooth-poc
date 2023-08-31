@@ -108,13 +108,6 @@ class BluetoothViewState extends State<BluetoothView> {
 
   @override
   Widget build(BuildContext context) {
-    /// quero fazer um aplicativo que use bluetooth.
-    /// Pode ser via package flutter_blue_plus.
-    /// Quero em uma tela inicial mostrar os dispositivos pareados, e ter um botao de scan.
-    /// A lista de devices pareados terá a opção de enviar um comando, ou desparear.
-    /// Ao clicar no botão de scan, abre uma nova tela e mostra os nearby devices.
-    /// Ao clicar em um nearby device, emparelha com o mesmo.
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Bluetooth PoC App'),
