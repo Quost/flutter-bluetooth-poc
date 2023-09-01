@@ -51,27 +51,7 @@ class ScanViewState extends State<ScanView> {
 
   Future<void> _connectAndPairToDevice(BluetoothDevice device) async {
     try {
-      device.connectionState.listen((BluetoothConnectionState state) async {
-        if (state == BluetoothConnectionState.connected) {
-          _isScanning = false;
-          FlutterBluePlus.stopScan();
-          Navigator.of(context).pop();
-        } else if (state == BluetoothConnectionState.disconnected) {
-          const int connectionAttempts = 3;
-          const int connectionAttemptDelay = 5;
-          int attempts = 0;
-
-          Timer.periodic(const Duration(seconds: connectionAttemptDelay),
-              (timer) {
-            if (attempts < connectionAttempts) {
-              attempts++;
-              device.connect(autoConnect: false);
-            } else {
-              timer.cancel();
-            }
-          });
-        }
-      });
+      device.connect(autoConnect: false);
     } catch (e) {
       // Lida com erros de conexão ou emparelhamento aqui.
       if (kDebugMode) {

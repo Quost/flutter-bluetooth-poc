@@ -32,6 +32,7 @@ class BluetoothViewState extends State<BluetoothView> {
   Future<void> _disconnectDevice(BluetoothDevice device) async {
     try {
       await device.disconnect();
+      await device.removeBond();
       // Atualize a lista de dispositivos após desconectar.
       _getPairedDevices();
     } catch (e) {
