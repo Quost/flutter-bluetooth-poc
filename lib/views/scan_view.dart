@@ -26,11 +26,10 @@ class ScanViewState extends State<ScanView> {
     FlutterBluePlus.scanResults.listen((results) {
       if (mounted) {
         setState(() {
-          if (kDebugMode) {
-            print('Scan results: ${results.toString()}');
-          }
-          results.removeWhere((result) =>
-              result.rssi < _minRSSI || result.device.localName.isEmpty);
+          results = results.where((result) {
+            final macAddress = result.device.remoteId.toString();
+            return macAddress.startsWith('38:31:AC');
+          }).toList();
 
           results.sort((a, b) => b.rssi.compareTo(a.rssi));
           _scanResults = results;

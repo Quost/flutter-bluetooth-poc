@@ -62,8 +62,22 @@ class BluetoothViewState extends State<BluetoothView> {
                 return ListTile(
                   title: Text(_pairedDevices[index].localName),
                   subtitle: Text(_pairedDevices[index].remoteId.toString()),
-                  onTap: () {
-                    // Implemente a lógica para conectar ao dispositivo aqui.
+                  onTap: () async {
+                    List<dynamic> services =
+                        await _pairedDevices[index].discoverServices();
+
+                    for (var service in services) {
+                      if (kDebugMode) {
+                        print('Service: ${service.uuid}');
+                      }
+                      // if (service.uuid == serviceGuid) {
+                      for (var characteristic in service.characteristics) {
+                        // if (characteristic.uuid == characteristicGuid) {
+                        if (kDebugMode) {
+                          print('Characteristic: ${characteristic.uuid}');
+                        }
+                      }
+                    }
                   },
                   trailing: ElevatedButton(
                     onPressed: () {
